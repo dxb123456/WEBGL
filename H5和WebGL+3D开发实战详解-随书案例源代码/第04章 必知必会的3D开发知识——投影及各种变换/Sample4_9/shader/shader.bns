@@ -1,0 +1,32 @@
+uniform mat4 uMVPMatrix; //总变换矩阵
+uniform mat4 uMMatrix; //变换矩阵
+attribute vec3 aPosition;  //顶点位置
+attribute vec4 aColor;    //顶点颜色
+varying  vec4 aaColor;  //用于传递给片元着色器的变量
+varying vec3 aaPosition;//用于传递给片元着色器的顶点位置
+
+void main()     
+{                            		
+   gl_Position = uMVPMatrix * vec4(aPosition,1); //根据总变换矩阵计算此次绘制此顶点位置
+   aaColor = aColor;//将接收的颜色传递给片元着色器
+   aaPosition=(uMMatrix * vec4(aPosition,1)).xyz;
+}                      
+
+<#BREAK_BN#>
+
+precision mediump float;
+varying  vec4 aaColor; //接收从顶点着色器过来的参数
+varying vec3 aaPosition;//接收从顶点着色器过来的参数
+
+void main()                         
+{                       
+   vec4 finalColor=aaColor;
+   //绕z轴转20度的矩阵
+   mat4 mm=mat4(0.9396926,-0.34202012,0.0,0.0,  0.34202012,0.9396926,0.0,0.0,  
+   			0.0,0.0,1.0,0.0,  0.0,0.0,0.0,1.0);   
+   vec4 tPosition=mm*vec4(aaPosition,1);//将顶点坐标绕z轴转20度   
+   if(mod(tPosition.x,0.4)>0.3) {//计算X方向在不在红光色带范围内     
+     finalColor=vec4(0.4,0.0,0.0,1.0)+finalColor;//若在给最终颜色加上淡红色
+   }
+   gl_FragColor = finalColor;//给此片元颜色值
+}              

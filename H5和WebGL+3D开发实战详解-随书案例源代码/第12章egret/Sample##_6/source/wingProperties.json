@@ -1,0 +1,30 @@
+{
+	"close":false,
+	"natures":["egretProject"],
+	"resourcePlugin":{
+		"configs":[{
+				"configPath":"resource/default.res.json",
+				"relativePath":"resource/"
+			}],
+		"id":"",
+		"library":{
+			"children":[
+				{
+					"isFolder":false,
+					"key":"bin-release/native/bin-release/resource/c7/c7ede4b3_323874.png",
+					"name":"c7ede4b3_323874.png"
+				},
+				{
+					"isFolder":false,
+					"key":"bin-release/web/bin-release/resource/laohu/dog.png",
+					"name":"dog.png"
+				},
+				{
+					"isFolder":false,
+					"key":"resource/laohu/chahu.jpg",
+					"name":"chahu.jpg"
+				}
+			]
+		}
+	}
+}
